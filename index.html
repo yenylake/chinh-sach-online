@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông báo Nội bộ - XLeader Academy</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C22620;
+            --primary-dark: #8B1A16;
+            --gold: #D4AF37;
+            --bg: #d9d9d9;
+            --white: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-gray: #4a4a4a;
+            --border: #f0f0f0;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px 0;
+            line-height: 1.4;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            width: 850px;
+            min-height: 1100px;
+            background: #fff;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .page-header {
+            background-color: var(--primary);
+            color: #fff;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            padding: 0 50px;
+            position: relative;
+        }
+
+        .logo-box img {
+            height: 80px;
+            filter: brightness(0) invert(1);
+        }
+
+        .header-decoration {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 200px;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 50%, rgba(255, 255, 255, 0.05) 50%);
+        }
+
+        .title-section {
+            background: #f8f8f8;
+            padding: 35px 40px 25px;
+            text-align: center;
+        }
+
+        .notice-tag {
+            background: var(--gold);
+            color: var(--white);
+            padding: 3px 15px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 2px;
+            display: inline-block;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        .notice-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 26px;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: 1px;
+            text-wrap: balance;
+            line-height: 1.2;
+        }
+
+        .notice-sub {
+            font-style: italic;
+            color: var(--text-gray);
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .container-content {
+            padding: 0 50px 40px;
+            flex-grow: 1;
+        }
+
+        .recipient-block {
+            background: #fff;
+            border-left: 4px solid var(--primary);
+            padding: 15px 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+            font-size: 15px;
+        }
+
+        h2 {
+            font-family: 'Oswald', sans-serif;
+            color: var(--white);
+            background: var(--primary);
+            padding: 8px 18px;
+            border-radius: 4px;
+            font-size: 17px;
+            text-transform: uppercase;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .content-card {
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            font-size: 14.5px;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 10px;
+            gap: 15px;
+        }
+
+        .info-label {
+            min-width: 150px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .plan-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        .plan-tile {
+            background: #fff;
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+            border-top: 3px solid var(--gold);
+            font-size: 13.5px;
+        }
+
+        .plan-tile strong {
+            display: block;
+            margin-bottom: 10px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 15px;
+            color: var(--primary);
+        }
+
+        .kpi-row {
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #fff;
+            border: 1px solid #eee;
+            font-size: 14px;
+        }
+
+        .kpi-value {
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+            color: var(--primary);
+            min-width: 80px;
+            text-align: center;
+            border-right: 2px solid #eee;
+        }
+
+        .signature-section {
+            padding: 30px 50px 50px;
+            text-align: right;
+            border-top: 1px solid #eee;
+        }
+
+        .signature-box {
+            display: inline-block;
+            text-align: center;
+        }
+
+        .signature-box strong {
+            display: block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 16px;
+            text-transform: uppercase;
+            color: var(--primary);
+        }
+
+        .signature-box span {
+            font-style: italic;
+            color: var(--text-gray);
+            display: block;
+            margin-bottom: 70px;
+            font-size: 13px;
+        }
+
+        .signature-name {
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+        <div class="page-header">
+            <div class="logo-box">
+                <img src="/Users/emilynguyen/Documents/XLeader & AI/1. Chuẩn hoá brand/Logo-06.png"
+                    alt="XLeader Logo">
+            </div>
+            <div class="header-decoration"></div>
+        </div>
+
+        <div class="title-section">
+            <div class="notice-tag">THÔNG BÁO NỘI BỘ</div>
+            <h1 class="notice-title">BAN HÀNH CHÍNH SÁCH TẶNG MENTORSHIP CHO ĐỘI NHÓM HỌC TẬP 2026</h1>
+            <div class="notice-sub">Số: 2026/04/TB-XL | Ngày 14/04/2026</div>
+        </div>
+
+        <div class="container-content">
+            <div class="recipient-block">
+                <strong>Kính gửi:</strong> Bộ phận R&D, Growth & MKT, Operations và Đội ngũ Giảng viên/Chuyên gia
+                XLeader Academy.
+            </div>
+
+            <p style="font-size: 15px; margin-bottom: 25px; text-indent: 25px;">
+                Nhằm thúc đẩy nâng cao quy trình tư vấn và gia tăng giá trị cho khách hàng CEO khi đăng ký các chuỗi đào
+                tạo,
+                XLeader chính thức ban hành chính sách <strong>Tặng Mentorship cho đội nhóm học tập 2026</strong>:
+            </p>
+
+            <h2>1. Thông tin chung</h2>
+            <div class="content-card">
+                <div class="info-row">
+                    <div class="info-label">Tên chính sách:</div>
+                    <div>Tặng Mentorship cho Đội nhóm học tập 2026.</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Giá trị cốt lõi:</div>
+                    <div>Chuyển hoá tri thức từ lớp học thành sản&nbsp;phẩm quản trị thực tế thông qua sự đồng hành trực
+                        tiếp và cố vấn từ chuyên gia.</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Đối tượng:</div>
+                    <div>Doanh&nbsp;nghiệp đăng ký team tối thiểu 04 người cho ít nhất 01 Chuỗi đào tạo.</div>
+                </div>
+            </div>
+
+            <h2>2. Kế hoạch triển khai</h2>
+            <div class="plan-grid">
+                <div class="plan-tile">
+                    <strong>ĐỘI NGŨ GROWTH</strong>
+                    <p>Sử dụng Brochure trình bày giá trị "Học + Đồng hành" thay vì chỉ bán khoá học riêng lẻ.</p>
+                </div>
+                <div class="plan-tile">
+                    <strong>ĐỘI NGŨ OPERATION</strong>
+                    <p>Theo dõi team học viên, chuẩn bị kế hoạch vận hành Offline Mentor xen kẽ các module.</p>
+                </div>
+                <div class="plan-tile">
+                    <strong>ĐỘI NGŨ MENTOR</strong>
+                    <p>Sẵn sàng giải pháp, nghiên cứu case study và tài liệu audit dựa trên dữ liệu thực tế.</p>
+                </div>
+            </div>
+
+            <h2>3. Mục tiêu chiến lược (KPIs)</h2>
+            <div class="kpi-row">
+                <div class="kpi-value">30%</div>
+                <div><strong>Chuyển đổi:</strong> Đăng ký tham gia Mentor đối với nhóm học viên hiện tại trong tháng
+                    4/2026.</div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi-value">Q2</div>
+                <div><strong>Doanh thu:</strong> Đảm bảo hoàn thành mục tiêu doanh số XLearning đề ra cho Quý 2/2026.
+                </div>
+            </div>
+            <div class="kpi-row" style="border-right: none;">
+                <div class="kpi-value">★</div>
+                <div><strong>Thương hiệu:</strong> Khẳng định vị thế dẫn đầu trong việc đồng hành & đối tác tăng trưởng
+                    tại doanh&nbsp;nghiệp.</div>
+            </div>
+
+            <h2 style="margin-top: 25px;">4. Hiệu lực</h2>
+            <p style="font-size: 15px;">Chính sách có hiệu lực kể từ ngày ban hành cho lộ trình tuyển sinh 2026.</p>
+        </div>
+
+        <div class="signature-section">
+            <div class="signature-box">
+                <strong>TM. BAN GIÁM ĐỐC</strong>
+                <span>(Đã ký)</span>
+                <div class="signature-name">BAN GIÁM ĐỐC XLEADER</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
