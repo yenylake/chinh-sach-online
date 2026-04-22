@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XLeader Academy | Khung Đào Tạo XTeam 2026-2027</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-red: #C22620;
+            --brand-red-dark: #8B1A16;
+            --brand-gold: #D4AF37;
+            --brand-gray: #444441;
+            --bg-main: #F8F7F5;
+            --bg-card: #FFFFFF;
+            --text-main: #1A1A1A;
+            --text-muted: #666666;
+            --border: #E5E1DA;
+            --radius: 16px;
+            --shadow: 0 10px 30px rgba(194, 38, 32, 0.08);
+            --sidebar-width: 280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-size: 15px;
+        }
+
+        /* Sidebar Styling */
+        aside {
+            width: var(--sidebar-width);
+            background: var(--brand-red-dark);
+            color: white;
+            padding: 40px 0;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.1);
+        }
+
+        .brand-box {
+            padding: 0 30px 40px 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 30px;
+        }
+
+        .brand-logo-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .brand-tagline {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            flex-grow: 1;
+            padding: 0 20px;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .nav-item:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .nav-item.active {
+            color: #fff;
+            background: var(--brand-red);
+            box-shadow: 0 4px 15px rgba(194, 38, 32, 0.4);
+        }
+
+        .nav-item i {
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content Styling */
+        main {
+            flex-grow: 1;
+            margin-left: var(--sidebar-width);
+            padding: 50px;
+            width: calc(100% - var(--sidebar-width));
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0;
+            position: sticky;
+            top: 0;
+            background: var(--bg-main);
+            z-index: 60;
+            padding: 30px 0 20px 0;
+            border-bottom: 1px solid var(--border);
+            min-height: 110px; /* Fixed height for sticky precision */
+        }
+
+        .page-title h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            color: var(--brand-red);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .page-title p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .meta-info {
+            background: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        /* Data Card */
+        .content-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: visible; /* CRITICAL for sticky child */
+            border: 1px solid var(--border);
+            margin-top: 25px;
+            animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .table-container {
+            overflow: visible; /* CRITICAL for sticky child */
+            position: relative;
+        }
+
+        /* Standardized Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            table-layout: auto;
+        }
+
+        th {
+            background-color: #F9FAFB;
+            color: var(--brand-red);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            padding: 14px 20px;
+            border-bottom: 2px solid var(--brand-red);
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            position: sticky;
+            top: 110px; /* Matched to header min-height */
+            z-index: 40;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        td {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: #FFF1F0;
+            transition: background 0.2s;
+        }
+
+        /* Group Header Row */
+        .subheader-row td {
+            background-color: #FDF2F2 !important;
+            color: var(--brand-red-dark);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 16px 20px;
+            border-left: 6px solid var(--brand-red);
+        }
+
+        /* Badge & Icons Styling */
+        .badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .badge-essential { background: #fee2e2; color: #b91c1c; }
+        .badge-recommended { background: #FFF9E6; color: #D4AF37; }
+        .badge-gold { background: #FFF9E6; color: var(--brand-gold); }
+
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            background-color: var(--brand-red);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        /* Column width hints */
+        .col-id { width: 60px; font-weight: 700; color: var(--brand-red); text-align: center; }
+        .col-cluster { font-weight: 600; color: var(--brand-red-dark); }
+        .col-main { min-width: 250px; }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-red);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 1024px) {
+            aside { width: 80px; }
+            .brand-box, .nav-item span, .brand-tagline { display: none; }
+            main { margin-left: 80px; width: calc(100% - 80px); padding: 30px; }
+            .nav-item { justify-content: center; padding: 15px; }
+            .nav-item i { margin-right: 0; font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside>
+        <div class="brand-box">
+            <div class="brand-logo-text">XLEADER</div>
+            <div class="brand-tagline">Academy Academy</div>
+        </div>
+        <nav id="sidebarNav">
+            <!-- Nav Injected by JS -->
+        </nav>
+    </aside>
+
+    <main>
+        <header>
+            <div class="page-title">
+                <h1 id="activeTitle">Tổng quan</h1>
+                <p>Khung Đào Tạo XTeam & Lộ trình năng lực 2026-2027</p>
+            </div>
+            <div class="meta-info" id="metaInfo">
+                Cập nhật: 22/04/2026 | Phiên bản 4.0
+            </div>
+        </header>
+
+        <section class="content-card">
+            <div class="table-container" id="contentArea">
+                <!-- Table Injected by JS -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const sheetData = {
+            "1. Tong quan": {
+                title: "1. Tổng quan chiến lược",
+                headers: ["#", "Cluster", "Mục tiêu cốt lõi", "Lead/Trainers", "Đối tượng", "Ưu tiên", "Timeline", "Tần suất"],
+                data: [
+                    ["I", "Văn hóa / Mindset / Habit", "Xây nền tảng tư duy & bản sắc văn hóa — Why we exist, Customer lens, HPO habits", "CEO (Thủy Phạm)", "Toàn bộ XTeam", "🔴 Cao", "2026 → liên tục", "Tuần"],
+                    ["II", "Inner — Phát triển nội tâm", "Nội lực cá nhân — EQ, self-awareness, resilience, self-leadership", "CHO (Linh Trần)", "Toàn bộ XTeam", "🔴 Cao", "2026 → liên tục", "Tuần"],
+                    ["III", "Tools / System", "Thành thạo hệ thống vận hành: M365, CRM, Dashboard", "CEO (Thủy Phạm)", "Toàn bộ XTeam", "🔴 Cao", "2026 → ongoing", "Tuần"],
+                    ["IV", "Chuyên môn / SOP — theo function", "Chuẩn hóa quy trình vận hành theo từng BU và chức năng", "COO (Yến Nguyễn)", "Theo function", "🔴 Cao", "2026 → ongoing", "Tháng"],
+                    ["V", "Sản phẩm — Product Knowledge", "Toàn XTeam articulate được giá trị từng sản phẩm XLeaders với CEO", "CEO (Thủy Phạm)", "Toàn bộ XTeam", "🔴 Cao", "2026 → ongoing", "Tháng"],
+                    ["VI", "Kỹ năng / Skills", "Kỹ năng nền tảng + Bán hàng + Nuôi dưỡng QHKH (Bộ 1) + Bộ Kỹ năng Quản lý đội nhóm (Bộ 2)", "COO (Yến Nguyễn)", "Phân tầng", "🔴 Cao", "2026 → 2027", "Tháng"],
+                    ["VII", "AI — Tư duy AI First & Ứng dụng", "AI First mindset + học tập cùng AI + bộ tools thực chiến theo function", "CEO (Thủy Phạm)", "Toàn bộ XTeam", "🔴 Cao", "2026 → 2027", "Tháng"],
+                    ["VIII", "Ngoại ngữ", "Tiếng Anh giao tiếp kinh doanh (ELS)", "CHO (Linh Trần)", "Ưu tiên C-level + Lead", "🟢 Thấp", "2027 trở đi", "Tháng"]
+                ]
+            },
+            "2. Roadmap": {
+                title: "2. Roadmap 2026-2027",
+                headers: ["Giai đoạn", "Cluster", "Module trọng điểm", "Mục tiêu giai đoạn", "Đối tượng", "Hình thức", "Tần suất", "KPI đo lường"],
+                data: [
+                    ["Q1–Q2/2026", "Xây nền tảng", "I Văn hóa, II Inner, III M365, V Sản phẩm", "Toàn XTeam aligned with XLeaders 2.0. Văn hóa nền được đặt. M365 vận hành.", "Toàn bộ XTeam", "Mini Learning / Sharing", "2-3 buổi/tuần", "% Completion"],
+                    ["Q3–Q4/2026", "Vận hành & Kỹ năng", "IV SOP theo BU, VI Kỹ năng, VII AI", "SOP được chuẩn hóa. Kỹ năng bán hàng kích hoạt. XTeam dùng AI hàng ngày.", "Theo function", "Mini Learning / Case sharing", "2-3 buổi/tuần", "Conversion"],
+                    ["2027", "Scale Up", "Tất cả cluster, VII AI Adv, VI Leadership, VIII English", "Flywheel học tập tự vận hành. Lãnh đạo coaching đội nhóm.", "Phân tầng", "Workshop / Mentoring", "1 buổi/tuần", "Revenue/Head"]
+                ]
+            },
+            "3. Matrix": {
+                title: "3. Ma trận đối tượng",
+                headers: ["Cluster / Module", "C-level", "Finance", "Growth", "Ops", "Human", "R&D", "Tech", "Media"],
+                data: [
+                    ["SUB:I. Văn hóa / Mindset", "", "", "", "", "", "", "", ""],
+                    ["I.1 Tôi hiểu XLeaders 2.0", "●", "●", "●", "●", "●", "●", "●", "●"],
+                    ["I.2 Lý tưởng & Niềm tin", "●", "●", "●", "●", "●", "●", "●", "●"],
+                    ["I.4 Customer Centric", "●", "◐", "●", "●", "◐", "●", "●", "●"],
+                    ["SUB:II. Inner Growth", "", "", "", "", "", "", "", ""],
+                    ["II.1 Self-awareness", "●", "●", "●", "●", "●", "●", "●", "●"],
+                    ["II.2 Emotional Intelligence", "●", "●", "●", "●", "●", "●", "●", "●"],
+                    ["SUB:III. Tools / System", "", "", "", "", "", "", "", ""],
+                    ["III.1 Microsoft 365", "●", "●", "●", "●", "◐", "●", "●", "—"],
+                    ["III.4 CRM — Quản lý", "◐", "◐", "●", "◐", "◐", "—", "◐", "—"],
+                    ["SUB:IV. Chuyên môn / SOP", "", "", "", "", "", "", "", ""],
+                    ["IV.1 SOP X-Learning", "◐", "—", "◐", "●", "◐", "◐", "◐", "●"],
+                    ["IV.2 SOP Growth Partner", "◐", "—", "●", "◐", "◐", "—", "—", "—"]
+                ]
+            },
+            "4. Modules": {
+                title: "4. Chi tiết Module",
+                headers: ["Cluster", "Mã", "Tên module", "Nội dung cốt lõi", "Đối tượng", "Mức độ", "Timeline", "Lead", "Thời gian"],
+                data: [
+                    ["SUB:I. Văn hóa / Mindset", "", "", "", "", "", "", "", ""],
+                    ["I", "I.1", "Tôi hiểu XLeaders 2.0", "Why we exist / Flywheel / Roles", "Toàn bộ", "Bắt buộc", "2026", "CEO Thuỷ Phạm", "04/2026"],
+                    ["I", "I.4", "Customer Centric / CX", "Chân dung CEO SME: tâm lý, nỗi đau, kỳ vọng", "Toàn bộ", "Bắt buộc", "2026", "CEO Thuỷ Phạm", "05/2026"],
+                    ["SUB:II. Inner Growth", "", "", "", "", "", "", "", ""],
+                    ["II", "II.1", "Self-awareness", "Hiểu điểm mạnh, phong cách bản thân", "Toàn bộ", "Bắt buộc", "2026", "CHO Linh Trần", "05/2026"],
+                    ["SUB:III. Tools / System", "", "", "", "", "", "", "", ""],
+                    ["III", "III.1", "Microsoft 365", "SharePoint / Teams / OneDrive", "Toàn bộ", "Bắt buộc", "2026", "CEO Thuỷ Phạm", "04/2026"],
+                    ["SUB:IV. Chuyên môn / SOP", "", "", "", "", "", "", "", ""],
+                    ["IV", "IV.1", "SOP X-Learning", "Quy trình tổ chức khóa học chi tiết", "Operations", "Bắt buộc", "2026", "Thuận Lê", "05/2026"],
+                    ["SUB:V. Sản phẩm", "", "", "", "", "", "", "", ""],
+                    ["V", "V.1", "MTCV CEO", "20 khóa, logic các tầng giá trị", "Toàn bộ", "Bắt buộc", "2026", "CEO Thuỷ Phạm", "05/2026"]
+                ]
+            }
+        };
+
+        function renderTable(key) {
+            const sheet = sheetData[key];
+            const contentArea = document.getElementById('contentArea');
+            const activeTitle = document.getElementById('activeTitle');
+            
+            activeTitle.innerText = sheet.title;
+            
+            let html = `<table><thead><tr>`;
+            sheet.headers.forEach((h, i) => {
+                let cls = '';
+                if (i === 0) cls = 'col-id';
+                if (h.includes('Cluster') || h.includes('Module')) cls = 'col-cluster';
+                html += `<th class="${cls}">${h}</th>`;
+            });
+            html += `</tr></thead><tbody>`;
+            
+            sheet.data.forEach(row => {
+                if (row[0].startsWith('SUB:')) {
+                    html += `<tr class="subheader-row"><td colspan="${sheet.headers.length}">${row[0].replace('SUB:', '')}</td></tr>`;
+                    return;
+                }
+                
+                html += `<tr>`;
+                row.forEach((cell, index) => {
+                    let formattedCell = cell;
+                    
+                    // Specific column formatting
+                    // Red color only for Roman numerals (I, II, III, etc.) in the first column
+                    const romanRegex = /^[IVXLCDM]+$/;
+                    if (index === 0 && romanRegex.test(cell.toString())) {
+                        formattedCell = `<span style="color:var(--brand-red); font-weight:700;">${cell}</span>`;
+                    } else if (index === 0 && key !== 'ROADMAP') {
+                        // Non-Roman numerals in first column (like I.1, I.2) use neutral color
+                        formattedCell = `<span style="font-weight:600; color:var(--text-main)">${cell}</span>`;
+                    }
+                    
+                    if (cell === '🔴 Cao') formattedCell = `<span class="badge badge-essential">Cao</span>`;
+                    if (cell === '🟢 Thấp') formattedCell = `<span class="badge badge-recommended">Thấp</span>`;
+                    if (cell === '●' ) formattedCell = `<span style="color:var(--brand-red); font-weight:800; font-size:1.1rem">${cell}</span>`;
+                    if (cell === '◐') formattedCell = `<span style="color:var(--brand-gold); font-weight:800; font-size:1.1rem">${cell}</span>`;
+                    
+                    html += `<td>${formattedCell}</td>`;
+                });
+                html += `</tr>`;
+            });
+            
+            html += `</tbody></table>`;
+            contentArea.innerHTML = html;
+        }
+
+        const navConfig = [
+            { key: '1. Tong quan', label: 'Tổng quan', icon: 'M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z' },
+            { key: '2. Roadmap', label: 'Roadmap', icon: 'M13 3h-2v10h2V3zm4 8h-2v6h2v-6zm-8 4H7v2h2v-2zm-4 4h18v2H3v-2z' },
+            { key: '3. Matrix', label: 'Ma trận', icon: 'M4 11h5V5H4v6zm0 7h5v-6H4v6zm6 0h5v-6h-5v6zm6 0h5v-6h-5v6zm-6-7h5V5h-5v6zm6-6v6h5V5h-5z' },
+            { key: '4. Modules', label: 'Chi tiết', icon: 'M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z' }
+        ];
+
+        const sidebarNav = document.getElementById('sidebarNav');
+        navConfig.forEach(cfg => {
+            const div = document.createElement('div');
+            div.className = `nav-item ${cfg.key === '1. Tong quan' ? 'active' : ''}`;
+            div.innerHTML = `
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right:12px;opacity:0.8"><path d="${cfg.icon}"/></svg>
+                <span>${cfg.label}</span>
+            `;
+            div.onclick = () => {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                div.classList.add('active');
+                renderTable(cfg.key);
+            };
+            sidebarNav.appendChild(div);
+        });
+
+        // Init
+        renderTable('1. Tong quan');
+    </script>
+</body>
+</html>
