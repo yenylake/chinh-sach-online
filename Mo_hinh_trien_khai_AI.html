@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mô hình triển khai AI Toàn diện</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        xred: '#E31B23',
+                        xdark: '#1A1A1A',
+                        xgold: '#C79A42',
+                        xlight: '#F8F9FA',
+                        xcard: '#FCE7E8'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        head: ['Oswald', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .diagram-container {
+            width: 1280px;
+            height: 720px;
+            background: white;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        
+        /* Center Frame */
+        .center-box { position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%); width: 450px; text-align: center; }
+        
+        /* 4 Pillars */
+        .pillar-top { position: absolute; top: 220px; left: 50%; transform: translateX(-50%); width: 550px; height: 44px; background-color: #E31B23; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; border-radius: 8px; font-size: 1.1rem; z-index: 10; box-shadow: 0 4px 6px rgba(227,27,35,0.3); }
+        .pillar-bottom { position: absolute; top: 460px; left: 50%; transform: translateX(-50%); width: 550px; height: 44px; background-color: #E31B23; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; border-radius: 8px; font-size: 1.1rem; z-index: 10; box-shadow: 0 4px 6px rgba(227,27,35,0.3); }
+        .pillar-left { position: absolute; top: 340px; left: 320px; transform: translate(-50%, -50%) rotate(-90deg); width: 236px; height: 44px; background-color: #1A1A1A; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; border-radius: 8px; font-size: 1rem; letter-spacing: 0.5px; z-index: 10;}
+        .pillar-right { position: absolute; top: 340px; right: 80px; transform: translate(-50%, -50%) rotate(-90deg); width: 236px; height: 44px; background-color: #1A1A1A; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; border-radius: 8px; font-size: 1rem; letter-spacing: 0.5px; z-index: 10;}
+
+        /* Dashed connecting lines */
+        .path-line { position: absolute; border: 2px dashed #CBD5E1; z-index: 1; }
+        
+        /* Nodes */
+        .node-icon { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: #FCE7E8; color: #E31B23; font-size: 1.25rem; border: 2px solid #E31B23; z-index: 5; position: relative; }
+        .node-box { background: white; border: 2px solid #E31B23; border-radius: 6px; padding: 4px 10px; font-weight: 600; font-size: 0.85rem; color: #1A1A1A; text-align: center; z-index: 5; position: relative;}
+        
+        /* Arrow heads */
+        .arrow-right { width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 10px solid #E31B23; position: absolute; }
+        .arrow-down { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 10px solid #E31B23; position: absolute; }
+        .arrow-up { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 10px solid #E31B23; position: absolute; }
+        
+        .solid-path { position: absolute; background-color: #E31B23; z-index: 1; }
+    </style>
+</head>
+<body>
+
+<div class="diagram-container text-gray-800 font-sans">
+    
+    <!-- HEADER -->
+    <div class="w-full h-16 bg-xdark text-white flex items-center px-8 border-b-4 border-xred">
+        <h1 class="font-head text-2xl uppercase tracking-wider flex items-center gap-3">
+            <i class="fa-solid fa-microchip text-xred"></i> Mô Hình Triển Khai AI Toàn Diện
+        </h1>
+        <div class="ml-auto text-sm opacity-80">XLeader Academy AI Strategy Framework</div>
+    </div>
+
+    <!-- MAIN DIAGRAM AREA -->
+    <!-- 4 Pillars -->
+    <div class="pillar-top uppercase font-head">Ghi nhận & lan toả "Best Practice" AI</div>
+    <div class="pillar-bottom uppercase font-head">Phát triển năng lực làm việc với AI</div>
+    <div class="pillar-left uppercase font-head whitespace-nowrap">Chuyển hoá văn hoá AI</div>
+    <div class="pillar-right uppercase font-head whitespace-nowrap">AI trong tiến trình công việc</div>
+
+    <!-- Center Text -->
+    <div class="center-box">
+        <h2 class="text-4xl font-head font-bold text-xdark uppercase leading-tight mb-2 tracking-wide">
+            Cơ Chế Khởi Động<br/><span class="text-xred">Trí Tuệ Nhân Tạo</span>
+        </h2>
+        <p class="text-sm font-semibold text-gray-500 uppercase tracking-widest">Tương thích với mọi tổ chức</p>
+    </div>
+
+    <!-- ==================== TOP STAGE: HORIZONTAL CARDS ==================== -->
+    <!-- Card 1 -->
+    <div class="absolute top-24 left-64 w-60 text-center">
+        <div class="w-16 h-16 mx-auto bg-xcard rounded-full flex items-center justify-center text-xred border-2 border-xred mb-3 relative z-10 box-shadow text-2xl">
+            <i class="fa-solid fa-layer-group"></i>
+        </div>
+        <div class="border border-gray-200 bg-white rounded-lg p-3 text-xs font-semibold shadow-sm text-gray-600 relative z-10">
+            Thu thập & chuẩn hoá các<br/>quy trình lõi thành dữ liệu
+        </div>
+        <div class="path-line w-32 h-0 top-8 left-16"></div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="absolute top-24 left-[520px] w-60 text-center">
+        <div class="w-16 h-16 mx-auto bg-xcard rounded-full flex items-center justify-center text-xred border-2 border-xred mb-3 relative z-10 box-shadow text-2xl">
+            <i class="fa-solid fa-network-wired"></i>
+        </div>
+        <div class="border border-gray-200 bg-white rounded-lg p-3 text-xs font-semibold shadow-sm text-gray-600 relative z-10">
+            Đóng gói Use Case &<br/>lan toả Prompt thư viện
+        </div>
+        <div class="path-line w-32 h-0 top-8 left-16"></div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="absolute top-24 right-56 w-60 text-center">
+        <div class="w-16 h-16 mx-auto bg-xcard rounded-full flex items-center justify-center text-xred border-2 border-xred mb-3 relative z-10 box-shadow text-2xl">
+            <i class="fa-solid fa-bullseye"></i>
+        </div>
+        <div class="border border-gray-200 bg-white rounded-lg p-3 text-xs font-semibold shadow-sm text-gray-600 relative z-10">
+            Nhận diện điểm "nghẽn"<br/>để triển khai Agent tối ưu
+        </div>
+    </div>
+
+
+    <!-- ==================== LEFT STAGE: VERTICAL KNOWLEDGE PIPELINE ==================== -->
+    <div class="absolute bottom-40 left-12 flex flex-col items-center w-32">
+        <div class="w-20 h-20 rounded-full bg-xdark border-4 border-xred flex items-center justify-center text-white mb-2 relative z-20 shadow-lg">
+            <div class="text-center">
+                <i class="fa-solid fa-power-off text-2xl mb-1 text-xred"></i>
+                <div class="text-[10px] font-bold">START</div>
+            </div>
+            <!-- Arrow coming out to right -->
+            <div class="solid-path h-1 w-12 top-10 -right-12"></div>
+            <div class="arrow-right top-[37px] -right-14"></div>
+        </div>
+        
+        <div class="bg-xcard text-xred font-bold text-xs p-2 rounded border border-xred text-center relative z-10 shadow-sm w-36 ml-4">
+            Truyền thông<br/>NHẬN THỨC AI
+        </div>
+
+        <div class="path-line w-0 h-48 bottom-40 left-16"></div>
+        <div class="arrow-up bottom-88 left-[61px]"></div>
+        
+        <div class="absolute bottom-64 -left-[30px] -rotate-90 origin-left border border-gray-300 bg-white px-6 py-2 font-bold text-sm text-gray-600 whitespace-nowrap shadow-sm tracking-wider">
+            XÁC NHẬN & TÍCH HỢP DATA
+        </div>
+    </div>
+
+
+    <!-- ==================== BOTTOM STAGE: TRAINING FLOW ==================== -->
+    <!-- The central horizontal flow below the bottom pillar -->
+    
+    <div class="absolute bottom-20 left-52 flex items-center gap-6">
+        
+        <!-- Diverging path -->
+        <div class="flex flex-col gap-6 justify-center">
+            <div class="flex items-center gap-2">
+                <div class="node-box"><i class="fa-solid fa-laptop-code mr-1"></i> Tự học AI</div>
+                <div class="solid-path h-[2px] w-6 relative"><div class="arrow-right -top-1 -right-2"></div></div>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="node-box"><i class="fa-solid fa-person-chalkboard mr-1"></i> Mentor dẫn</div>
+                <div class="solid-path h-[2px] w-6 relative"><div class="arrow-right -top-1 -right-2"></div></div>
+            </div>
+        </div>
+
+        <!-- Converge -->
+        <div class="flex flex-col items-center">
+            <div class="node-icon bg-xred text-white"><i class="fa-solid fa-rocket"></i></div>
+            <div class="text-xs font-bold mt-2 text-gray-700">Trải nghiệm<br/>Pilot</div>
+        </div>
+
+        <div class="solid-path h-[2px] w-8 relative"><div class="arrow-right -top-1 -right-2"></div></div>
+
+        <!-- Micro learning -->
+        <div class="flex flex-col items-center text-center -mt-6">
+            <i class="fa-solid fa-bolt text-xgold text-xl mb-1"></i>
+            <div class="text-[10px] font-bold text-gray-500 mb-1">Micro Learning</div>
+            <div class="node-icon rounded-lg w-10 h-14 bg-white"><i class="fa-solid fa-mobile-screen"></i></div>
+        </div>
+
+        <div class="solid-path h-[2px] w-6 relative"><div class="arrow-right -top-1 -right-2"></div></div>
+
+        <!-- Báo cáo -->
+        <div class="node-box py-2">Báo cáo<br/>Hiệu suất</div>
+
+        <div class="solid-path h-[2px] w-6 relative"><div class="arrow-right -top-1 -right-2"></div></div>
+
+        <!-- Clinic -->
+        <div class="flex flex-col items-center">
+            <div class="node-icon bg-gray-800 text-white border-gray-800 rounded-md w-12 h-12">
+                <i class="fa-solid fa-hospital"></i>
+            </div>
+            <div class="text-xs font-bold mt-2 text-gray-700 text-center">AI Clinic<br/>(Gỡ Rối)</div>
+        </div>
+
+        <div class="solid-path h-[2px] w-6 relative"><div class="arrow-right -top-1 -right-2"></div></div>
+
+        <!-- Chứng nhận -->
+        <div class="node-box flex items-center gap-2">
+            <i class="fa-solid fa-certificate text-xred"></i>
+            Chứng nhận
+        </div>
+
+        <div class="solid-path h-[2px] w-6 relative"><div class="arrow-right -top-1 -right-2"></div></div>
+
+        <!-- Champion Team -->
+        <div class="node-box flex items-center gap-2 border-xgold text-xgold bg-yellow-50">
+            <i class="fa-solid fa-users-crown"></i>
+            Champion Team
+        </div>
+    </div>
+
+
+    <!-- ==================== RIGHT STAGE: GRAPH / METRICS ==================== -->
+    <div class="absolute bottom-20 right-12 w-64 h-56 bg-xlight border border-gray-200 rounded-lg p-4 shadow-inner">
+        <h3 class="text-center text-xs font-bold text-gray-500 mb-2">TỐC ĐỘ ỨNG DỤNG AI</h3>
+        
+        <!-- Axis -->
+        <div class="absolute left-6 bottom-8 w-1 h-36 bg-gray-300">
+            <div class="arrow-up -top-2 -left-[2px] border-b-gray-400"></div>
+        </div>
+        <div class="absolute left-6 bottom-8 w-48 h-1 bg-gray-300">
+            <div class="arrow-right -right-2 -top-[2px] border-l-gray-400"></div>
+        </div>
+
+        <!-- Y Axis labels -->
+        <div class="absolute left-1 bottom-10 text-[9px] font-bold text-gray-400 -rotate-90 origin-left">Expert</div>
+        <div class="absolute left-1 bottom-24 text-[9px] font-bold text-gray-400 -rotate-90 origin-left">Seasoned</div>
+        <div class="absolute left-1 bottom-36 text-[9px] font-bold text-gray-400 -rotate-90 origin-left">Newbie</div>
+
+        <!-- Graph Curves (CSS approximations) -->
+        <!-- Curve 1 (Great) -->
+        <svg class="absolute left-6 bottom-8 w-48 h-36" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M 0 100 Q 20 80, 50 20 T 100 10" fill="none" stroke="#E31B23" stroke-width="2" stroke-dasharray="4,2"/>
+            <path d="M 0 100 Q 40 90, 70 50 T 100 0" fill="none" stroke="#C79A42" stroke-width="2" />
+        </svg>
+
+        <!-- Node markers -->
+        <div class="absolute left-20 bottom-16 bg-gray-800 text-white text-[8px] px-1 rounded">Experiment</div>
+        <div class="absolute left-32 bottom-28 bg-xred text-white text-[8px] px-1 rounded">Peer Learn</div>
+        <div class="absolute left-40 bottom-[110px] bg-xgold text-white text-[8px] px-1 rounded">Integration</div>
+
+        <!-- X Axis label -->
+        <div class="absolute bottom-2 left-0 right-0 text-center text-[10px] text-gray-500 font-semibold">
+            Thời gian tích hợp AI
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
